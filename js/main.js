@@ -38,5 +38,11 @@ class Queue {
     
       clear() {
         this.items = [];
-      }
+      } 
 }
+//we are using  arrow notation(es6) to get the elements child properties
+const lifts = Array.from(document.querySelectorAll(".lift-container"), (el) => ({
+    htmlEl: el,
+    busy: false,
+    currFloor: 0,
+  }));
