@@ -145,3 +145,23 @@ const lifts = Array.from(document.querySelectorAll(".lift-container"), (el) => (
   function removeRequest() {
     requests.dequeue();
   }
+  const requestAddedEvent = new Event("requestAdded");
+  const liftIdleEvent = new Event("liftIdle");
+  
+  function dispatchRequestAdded() {
+    document.dispatchEvent(requestAddedEvent);
+  }
+  
+  function dispatchliftIdle() {
+    document.dispatchEvent(liftIdleEvent);
+  }
+  
+  document.addEventListener("requestAdded", () => {
+    callLift(); //call  the function which animates the lift back to floor
+  });
+  
+  document.addEventListener("liftIdle", () => {
+    if (!requests.isEmpty()) {
+      callLift();
+    }
+  });
