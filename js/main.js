@@ -183,4 +183,26 @@ const lifts = Array.from(document.querySelectorAll(".lift-container"), (el) => (
       return;
     }
   }
+  function getLiftEl() {
+    const liftDistance = (lifts.length + 1) * 120;
   
+    const liftEL = document.createElement("div");
+    liftEL.classList.add("lift-container");
+    liftEL.style.position = "absolute";
+    liftEL.style.left = `${liftDistance}px`;
+  
+    liftEL.innerHTML += `
+              <div class="left-door">
+              </div>
+              <div class="right-door">
+              </div>
+          `;
+  
+    return liftEL;
+  }
+  function addFloor() {
+    floorsContainer.prepend(getFloorEl());
+    floors = document.querySelectorAll(".floor");
+    buttons = document.querySelectorAll(".call-lift-btn");
+    addCallLiftListeners([buttons[0], buttons[1]]);
+  }
