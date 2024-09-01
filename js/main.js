@@ -165,3 +165,21 @@ const lifts = Array.from(document.querySelectorAll(".lift-container"), (el) => (
       callLift();
     }
   });
+  function addLift() {
+    floors[floors.length - 1].append(getLiftEl());
+    liftEls = document.querySelectorAll(".lift-container");
+    lifts.push({
+      htmlEl: liftEls[liftEls.length - 1],
+      busy: false,
+      currFloor: 0,
+    });
+    leftDoors = document.querySelectorAll(".left-door");
+    rightDoors = document.querySelectorAll(".right-door");
+  
+    if(lifts.length >= getMaxLifts()) {
+      console.log("Max lifts added");
+      addLiftBtn.disabled = true;
+      addLiftBtn.textContent = "Max lifts added"
+      return;
+    }
+  }
