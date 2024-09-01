@@ -57,13 +57,13 @@ const lifts = Array.from(document.querySelectorAll(".lift-container"), (el) => (
       (result, value, i) =>
         result.concat(
             //here used ternary operators
-          value.busy === false
+          value.busy === false //check lift state
             ? {
                 i,
                 currFloor: value.currFloor,
                 distance: Math.abs(destFloor - value.currFloor),//get the nearest value in absolute whole digits
               }
-            : []
+            : [] //put into the lift state array
         ),
       []
     );
@@ -112,7 +112,7 @@ const lifts = Array.from(document.querySelectorAll(".lift-container"), (el) => (
   
     rightDoors[index].classList.remove("right-door-open");
     leftDoors[index].classList.remove("left-door-open");
-    buttons.disabled = false;
+    buttons.disabled = true;
   
     setTimeout(() => {
       lifts[index].busy = false;
