@@ -183,3 +183,4 @@ const lifts = Array.from(document.querySelectorAll(".lift-container"), (el) => (
       return;
     }
   }
+  
