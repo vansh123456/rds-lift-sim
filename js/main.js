@@ -129,3 +129,16 @@ form.addEventListener('submit', function (event) {
           return null;
         }
       }
+      function moveLift(floorNo, lift) {
+        const liftElement = document.getElementById(lift.liftId);
+        const currentFloor = lift.currentFloor;
+      
+        lift.moving = true;
+        lift.stops.push(floorNo);
+        liftElement.style.transition = `all ${totalDuration}s`;
+        liftElement.style.transform = `translateY(-${(floorNo - 1) * 122}px)`;
+      
+        setTimeout(() => {
+          openAndCloseDoors(floorNo, lift);
+        }, totalDuration * 1000);
+      }
