@@ -142,3 +142,11 @@ form.addEventListener('submit', function (event) {
           openAndCloseDoors(floorNo, lift);
         }, totalDuration * 1000);
       }
+      function openAndCloseDoors(floorNo, lift) {
+        let liftEl = document.getElementById(lift.liftId);
+        let leftDoor = liftEl.querySelector('.left-door');
+        let rightDoor = liftEl.querySelector('.right-door');
+      
+        leftDoor.classList.add('left-move');
+        rightDoor.classList.add('right-move');
+      }
