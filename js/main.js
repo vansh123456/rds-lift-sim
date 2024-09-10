@@ -87,4 +87,45 @@ form.addEventListener('submit', function (event) {
       
         addLiftButtonListeners();
       }
+      function addLiftButtonListeners() {
+        const liftButtons = document.querySelectorAll('.lift-button');
       
+        liftButtons.forEach((button) => {
+          button.addEventListener('click', handleLiftButtonClick);
+        });
+      }
+      function handleLiftButtonClick() {
+        const floorElement = this.closest('.floor-content');
+        const floorNo = parseInt(floorElement.parentNode.id.split('-')[1]);
+      
+        const ifLiftAlreadyHeading = lifts.find((lift) =>
+          lift.stops.includes(floorNo)
+        );
+        // if undefined that means no lift is going to that particular floor
+        if (!ifLiftAlreadyHeading) {
+          const requiredLift = findNearestIdleLift(floorNo);
+          if (requiredLift) {
+            moveLift(floorNo, requiredLift);
+          } else {
+            if (!pendingQueue.includes(floorNo)) {
+              pendingQueue.push(floorNo);
+            }
+          }
+        }
+      }
+      function findNearestIdleLift(floorNo) {
+        const idleLifts = lifts.filter((lift) => !lift.moving);
+      
+        if (idleLifts.length > 0) {
+          const nearestLift = idleLifts.reduce((nearest, currentLift) => {
+            const distance = Math.abs(floorNo - currentLift.currentFloor);
+            if (!nearest || distance < Math.abs(floorNo - nearest.currentFloor)) {
+              return currentLift;
+            }
+            return nearest;
+          }, null);
+          return nearestLift;
+        } else {
+          return null;
+        }
+      }
