@@ -132,6 +132,7 @@ form.addEventListener('submit', function (event) {
       function moveLift(floorNo, lift) {
         const liftElement = document.getElementById(lift.liftId);
         const currentFloor = lift.currentFloor;
+        const totalDuration = Math.abs(floorNo - currentFloor) * 2;
         lift.moving = true;
         lift.stops.push(floorNo);
         liftElement.style.transition = `all ${totalDuration}s`;
