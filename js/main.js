@@ -149,4 +149,21 @@ form.addEventListener('submit', function (event) {
       
         leftDoor.classList.add('left-move');
         rightDoor.classList.add('right-move');
+        setTimeout(() => {
+            leftDoor.classList.remove('left-move');
+            rightDoor.classList.remove('right-move');
+            setTimeout(() => {
+              lift.currentFloor = floorNo;
+              lift.moving = false;
+              const index = lift.stops.indexOf(floorNo);
+              if (index !== -1) {
+                lift.stops.splice(index, 1);
+              }
+              if (pendingQueue.length > 0) {
+                let newFloorNo = pendingQueue[0];
+                pendingQueue.shift();
+                moveLift(newFloorNo, lift);
+              }
+            }, 2500);
+          }, 2500);
       }
