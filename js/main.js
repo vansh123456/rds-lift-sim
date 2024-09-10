@@ -59,3 +59,32 @@ form.addEventListener('submit', function (event) {
           floorsContainer.appendChild(floorDiv);
         }
       }
+      function generateLifts(numLifts) {
+        const firstFloor = document.getElementById('floor-1');
+        for (let lift = 1; lift <= numLifts; lift++) {
+          const liftElement = document.createElement('div');
+          liftElement.classList.add('lift');
+          liftElement.id = `lift-${lift}`;
+      
+          const liftDoorOpening = document.createElement('div');
+          liftDoorOpening.classList.add('lift-door', 'left-door');
+          liftElement.appendChild(liftDoorOpening);
+      
+          const liftDoorClosing = document.createElement('div');
+          liftDoorClosing.classList.add('lift-door', 'right-door');
+          liftElement.appendChild(liftDoorClosing);
+          liftElement.style.position = 'relative';
+          firstFloor.appendChild(liftElement);
+      
+          lifts.push({
+            liftId: `lift-${lift}`,
+            currentFloor: 1,
+            moving: false,
+            direction: null,
+            stops: [],
+          });
+        }
+      
+        addLiftButtonListeners();
+      }
+      
